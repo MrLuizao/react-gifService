@@ -1,9 +1,10 @@
 import React, {useState, Fragment} from 'react'
 import { AddCategory } from './Components/AddCategory';
+import { GifDataList } from './Components/GifDataList';
 
 export const GifServiceApp = () => {
 
-    const [categories, setcategories] = useState(['Saint Seiya', 'Dragon Ball', 'Death Note']);
+    const [categories, setcategories] = useState(['']);
 
     // const handleAdd = () =>  {
     //     // setcategories( [...categories, 'Castlevania'] );
@@ -19,9 +20,15 @@ export const GifServiceApp = () => {
 
             <ol>
                 {
-                    categories.map( category => {
-                        return <li key = {category}> {category} </li>
-                    })
+                    // categories.map( category => {
+                    //     return <li key = {category}> {category} </li>
+                    // })
+                    categories.map( category => (
+                        <GifDataList 
+                            key = { category }
+                            category = { category } 
+                        />
+                    ))
                 }
             </ol>
             
