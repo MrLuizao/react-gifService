@@ -1,25 +1,28 @@
-import React, { useState, useEffect, Fragment} from 'react'
+import React, { Fragment} from 'react'
 import { GifItem } from './GifItem';
-import { GetGifs } from '../Helpers/GetGifs';
+// import { GetGifs } from '../Helpers/GetGifs';
+import {useFetchGif} from '../Hooks/useFetchGif';
+
 
 export const GifDataList = ( { category } ) => {
 
-    const [images, setimages] = useState([]);
+    // const [images, setimages] = useState([]);
+    // useEffect ( () => {
+    //     GetGifs( category )
+    //         .then( images => setimages ( images ))
+    // }, [ category ])
 
-    useEffect ( () => {
-
-        GetGifs( category )
-            .then( images => setimages ( images ))
-
-    }, [ category ])
-
+    const { data:images, loading } = useFetchGif( category );
 
 
     return (
         <Fragment>
             <h3> { category }</h3>
-            <div className="card-grid">
 
+            {/* {loading ? 'loading...' : 'ready!' } */}
+            {loading && <p>loading</p> }
+
+            <div className="card-grid">
                 {
                     images.map( img => (
                         <GifItem
@@ -30,6 +33,7 @@ export const GifDataList = ( { category } ) => {
                     ))
                 }
             </div>
+
         </Fragment>
     )
 }
